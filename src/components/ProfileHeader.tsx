@@ -21,13 +21,13 @@ export const ProfileHeader = () => {
       >
         <div className="space-y-2">
           <h2 className="text-white text-5xl md:text-8xl font-black tracking-tighter uppercase leading-none">
-            HI
+            HELLO 🌍
             <br />
             I AM <br />
             <MagicText className="mt-2">VALENTINA.</MagicText>
           </h2>
           <p className="text-gray-400 text-lg md:text-xl max-w-xl font-light leading-relaxed">
-            A passionate frontend developer dedicated to building high-quality,
+            A passionate Front-End developer dedicated to building high-quality,
             accessible and user-friendly web applications.
           </p>
         </div>

@@ -2,7 +2,7 @@
 
 A modern, dynamic, and responsive portfolio built with the latest web technologies.
 
-![Portfolio Preview](public/preview.png)
+![Portfolio Preview](public/images/preview.png)
 
 ## ✨ Features
 
@@ -64,4 +64,4 @@ It was developed using advanced AI models (Antigravity/Gemini) that assisted in:
 
 ---
 
-Made with ❤️ and 🤖 by Valen Contreras
+Made with ❤️ and 🤖 by Valentina Contreras

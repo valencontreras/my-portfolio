@@ -2,12 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import {
-  FaBriefcase,
-  FaCode,
-  FaGraduationCap,
-  FaLaptopCode,
-} from "react-icons/fa";
+import { FaBriefcase, FaCode, FaGraduationCap, FaRobot } from "react-icons/fa";
 import { MagicText } from "./MagicUI";
 
 const workExperience = [
@@ -20,15 +15,15 @@ const workExperience = [
   },
   {
     id: 2,
-    title: "UI Designer",
-    desc: "Crafted beautiful and intuitive user interfaces with Figma and Framer.",
+    title: "AI-Assisted Developer",
+    desc: "Leveraging cutting-edge AI tools to enhance development productivity and build intelligent web solutions.",
     className: "md:col-span-1",
-    icon: <FaLaptopCode className="text-purple-400" size={32} />,
+    icon: <FaRobot className="text-blue-400" size={32} />,
   },
   {
     id: 3,
     title: "Software Engineer",
-    desc: "Full-stack development with a focus on scalable architecture and clean code.",
+    desc: "Development with a focus on scalable architecture and clean code.",
     className: "md:col-span-1",
     icon: <FaBriefcase className="text-green-400" size={32} />,
   },
@@ -59,7 +54,7 @@ export const Experience = () => {
             <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-transparent via-purple-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
             <div className="flex flex-col md:flex-row md:items-center gap-6">
-              <div className="p-4 rounded-2xl bg-black/50 border border-white/10 group-hover:border-purple-500/30 transition-colors">
+              <div className="p-4 w-fit rounded-2xl bg-black/50 border border-white/10 group-hover:border-purple-500/30 transition-colors">
                 {card.icon}
               </div>
               <div className="space-y-2">

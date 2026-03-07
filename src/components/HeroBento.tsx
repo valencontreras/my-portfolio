@@ -56,7 +56,7 @@ export const HeroBento = () => {
                 Transforming Concepts into Seamless User Experiences
               </h1>
               <p className="text-lg text-gray-400 max-w-lg">
-                I'm a Full-Stack Developer specializing in modern web
+                I'm a Front-End Developer specializing in modern web
                 technologies, building high-performance applications with
                 beautiful interfaces.
               </p>

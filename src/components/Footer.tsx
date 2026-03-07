@@ -41,7 +41,9 @@ export const Footer = () => {
 
       <div className="flex flex-col md:flex-row justify-between items-center mt-32 border-t border-white/10 pt-10 gap-8">
         <p className="text-sm font-light text-gray-400">
-          Copyright &copy; 2026 Valentina Contreras ❤️
+          Made with ❤️ and 🤖 by Valentina Contreras
+          <br />
+          Copyright &copy; 2026
         </p>
 
         <div className="flex items-center gap-6">

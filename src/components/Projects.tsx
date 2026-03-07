@@ -3,25 +3,30 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { FaExternalLinkAlt } from "react-icons/fa";
+import { FaExternalLinkAlt, FaGithub, FaReact } from "react-icons/fa";
 import { MagicText } from "./MagicUI";
+import {
+  SiReact,
+  SiNextdotjs,
+  SiTypescript,
+  SiTailwindcss,
+} from "react-icons/si";
+import Link from "next/link";
 
 const projects = [
   {
     id: 1,
-    title: "AI Canvas Platform",
-    des: "A revolutionary AI painting tool that generates art from text prompts using stable diffusion.",
-    img: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1932&auto=format&fit=crop",
-    iconLists: ["/re.svg", "/tail.svg", "/ts.svg", "/three.svg", "/fm.svg"],
-    link: "https://example.com",
-  },
-  {
-    id: 2,
-    title: "Modern SaaS Dashboard",
-    des: "An enterprise-ready dashboard with real-time analytics, user management, and dark mode.",
-    img: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1932&auto=format&fit=crop",
-    iconLists: ["/next.svg", "/tail.svg", "/ts.svg", "/stream.svg", "/c.svg"],
-    link: "https://example.com",
+    title: "Frontend Template for Projects",
+    des: "A responsive and modern frontend template for projects, built with React and Tailwind CSS.",
+    img: "/images/projects/frontend-template.png",
+    iconLists: [
+      { icon: <SiReact />, label: "React JS" },
+      { icon: <SiNextdotjs />, label: "Next JS" },
+      { icon: <SiTypescript />, label: "TypeScript" },
+      { icon: <SiTailwindcss />, label: "Tailwind" },
+    ],
+    link: "https://frontend-exo-template.vercel.app/",
+    github: "https://github.com/Cszart/frontend-EXO-template/tree/main",
   },
 ];
 
@@ -57,28 +62,44 @@ export const Projects = () => {
                 {item.des}
               </p>
 
-              <div className="flex items-center justify-between mt-7 mb-3">
+              <div className="flex flex-col md:flex-row md:items-center justify-between mt-7 mb-3">
                 <div className="flex items-center">
                   {item.iconLists.map((icon, index) => (
                     <div
                       key={index}
+                      title={icon.label}
                       className="border border-white/20 rounded-full bg-black lg:w-10 lg:h-10 w-8 h-8 flex justify-center items-center"
                       style={{
                         transform: `translateX(-${5 * index + 2}px)`,
                       }}
                     >
-                      <div className="p-1 uppercase text-[8px] font-bold text-gray-400">
-                        {icon.split(".")[0].replace("/", "")}
+                      <div className="p-1 uppercase text-md text-gray-400">
+                        {icon.icon}
                       </div>
                     </div>
                   ))}
                 </div>
 
-                <div className="flex justify-center items-center gap-2">
-                  <p className="flex lg:text-xl md:text-xs text-sm text-purple-400 font-semibold group-hover:text-white transition-colors">
-                    Check Live Site
-                  </p>
-                  <FaExternalLinkAlt className="ms-3" color="#CBACF9" />
+                <div className="flex items-center gap-x-2">
+                  <Link
+                    href={item.link}
+                    target="_blank"
+                    className="flex justify-center items-center gap-2"
+                  >
+                    <p className="flex text-md text-purple-400 font-semibold group-hover:text-white transition-colors">
+                      Check Live Site
+                    </p>
+                    <FaExternalLinkAlt color="#CBACF9" />
+                  </Link>
+
+                  <Link
+                    href={item.github}
+                    target="_blank"
+                    title="Link to Github"
+                    className="w-12 h-12 rounded-full flex items-center justify-center hover:bg-white/10 transition-colors text-white"
+                  >
+                    <FaGithub size={20} />
+                  </Link>
                 </div>
               </div>
             </div>

@@ -1,8 +1,10 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { Menu, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const navItems = [
   { name: "About", link: "#about" },
@@ -13,28 +15,49 @@ const navItems = [
 
 export const Navbar = () => {
   const [activeSection, setActiveSection] = useState("");
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
-    // Handle initial hash on mount
-    const handleHashChange = () => {
-      setActiveSection(window.location.hash || "#about");
+    const handleScroll = () => {
+      const sections = navItems.map((item) => {
+        const element = document.querySelector(item.link);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          return {
+            link: item.link,
+            top: rect.top,
+            bottom: rect.bottom,
+          };
+        }
+        return null;
+      });
+
+      const currentSection = sections.find((section) => {
+        if (section) {
+          // Check if section is in viewport (with some offset)
+          return section.top <= 100 && section.bottom >= 100;
+        }
+        return false;
+      });
+
+      if (currentSection) {
+        setTimeout(() => {
+          setActiveSection(currentSection.link);
+        }, 800);
+      }
     };
 
-    // Set initial state
-    handleHashChange();
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Initial check
 
-    // Listen for hash changes and popstate (back/forward)
-    window.addEventListener("hashchange", handleHashChange);
-    window.addEventListener("popstate", handleHashChange);
-
-    return () => {
-      window.removeEventListener("hashchange", handleHashChange);
-      window.removeEventListener("popstate", handleHashChange);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const handleLinkClick = (link: string) => {
-    setActiveSection(link);
+    setTimeout(() => {
+      setActiveSection(link);
+    }, 800);
+    setIsMenuOpen(false);
   };
 
   return (
@@ -44,7 +67,7 @@ export const Navbar = () => {
         <div className="flex items-center gap-3">
           <div className="relative h-10 w-10 overflow-hidden rounded-full border border-white/20">
             <Image
-              src="/images/profile.png"
+              src="/logo.png"
               alt="Profile"
               fill
               className="object-cover"
@@ -85,10 +108,38 @@ export const Navbar = () => {
           ))}
         </div>
 
-        {/* Mobile Menu Placeholder (Optional) */}
-        <div className="md:hidden">
-          <span className="text-white text-xs">Menu</span>
-        </div>
+        {/* Mobile Menu Toggle */}
+        <button
+          className="text-white md:hidden p-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+        >
+          {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
+        </button>
+
+        {/* Mobile Menu Overlay */}
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="absolute left-0 right-0 top-full mt-4 flex flex-col gap-4 rounded-3xl border border-white/10 bg-black/90 p-6 backdrop-blur-xl md:hidden"
+            >
+              {navItems.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.link}
+                  onClick={() => handleLinkClick(item.link)}
+                  className={`text-lg font-medium transition-colors ${
+                    activeSection === item.link ? "text-white" : "text-gray-400"
+                  }`}
+                >
+                  {item.name}
+                </Link>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
     </header>
   );
