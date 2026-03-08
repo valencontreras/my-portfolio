@@ -56,10 +56,10 @@ export const Projects = () => {
 
             <div className="w-full mt-6 space-y-3">
               <h1 className="font-bold text-xl md:text-2xl text-white line-clamp-1">
-                {item.title}
+                <span>{item.title}</span>
               </h1>
               <p className="text-sm md:text-md text-gray-400 font-light line-clamp-2">
-                {item.des}
+                <span>{item.des}</span>
               </p>
 
               <div className="flex flex-col md:flex-row md:items-center justify-between mt-7 mb-3">
@@ -87,7 +87,7 @@ export const Projects = () => {
                     className="flex justify-center items-center gap-2"
                   >
                     <p className="flex text-md text-purple-400 font-semibold group-hover:text-white transition-colors">
-                      Check Live Site
+                      <span>Check Live Site</span>
                     </p>
                     <FaExternalLinkAlt color="#CBACF9" />
                   </Link>

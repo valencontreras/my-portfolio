@@ -20,15 +20,16 @@ export const ProfileHeader = () => {
         className="flex-1 space-y-8"
       >
         <div className="space-y-2">
-          <h2 className="text-white text-5xl md:text-8xl font-black tracking-tighter uppercase leading-none">
-            HELLO 🌍
-            <br />
-            I AM <br />
+          <h2 className="text-white text-5xl md:text-8xl font-black tracking-tighter uppercase leading-none flex flex-col">
+            <span>HELLO 🌍</span>
+            <span>I AM</span>
             <MagicText className="mt-2">VALENTINA.</MagicText>
           </h2>
           <p className="text-gray-400 text-lg md:text-xl max-w-xl font-light leading-relaxed">
-            A passionate Front-End developer dedicated to building high-quality,
-            accessible and user-friendly web applications.
+            <span>
+              A passionate Front-End developer dedicated to building
+              high-quality, accessible and user-friendly web applications.
+            </span>
           </p>
         </div>
 
@@ -40,7 +41,7 @@ export const ProfileHeader = () => {
               )
             }
           >
-            CONTACT ME
+            <span>CONTACT ME</span>
           </MagicButton>
 
           <div className="flex gap-4">

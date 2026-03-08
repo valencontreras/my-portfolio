@@ -58,9 +58,11 @@ export const Experience = () => {
                 {card.icon}
               </div>
               <div className="space-y-2">
-                <h2 className="text-xl md:text-2xl font-bold">{card.title}</h2>
+                <h2 className="text-xl md:text-2xl font-bold">
+                  <span>{card.title}</span>
+                </h2>
                 <p className="text-gray-400 font-light text-sm md:text-base">
-                  {card.desc}
+                  <span>{card.desc}</span>
                 </p>
               </div>
             </div>

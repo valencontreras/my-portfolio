@@ -96,14 +96,14 @@ export const Navbar = () => {
               key={item.name}
               href={item.link}
               onClick={() => handleLinkClick(item.link)}
-              className={`text-sm font-medium transition-colors hover:text-white relative ${
+              className={`text-sm font-medium transition-colors hover:text-white relative flex items-center gap-1 ${
                 activeSection === item.link ? "text-white" : "text-gray-400"
               }`}
             >
+              <span>{item.name}</span>
               {activeSection === item.link && (
-                <span className="size-1.5 bg-blue-500 rounded-full absolute top-0 -right-2 shadow-[0_0_8px_rgba(59,130,246,0.8)]" />
+                <span className="size-1.5 bg-blue-500 rounded-full shadow-[0_0_8px_rgba(59,130,246,0.8)] shrink-0" />
               )}
-              {item.name}
             </Link>
           ))}
         </div>
@@ -130,11 +130,14 @@ export const Navbar = () => {
                   key={item.name}
                   href={item.link}
                   onClick={() => handleLinkClick(item.link)}
-                  className={`text-lg font-medium transition-colors ${
+                  className={`text-lg font-medium transition-colors flex items-center justify-between ${
                     activeSection === item.link ? "text-white" : "text-gray-400"
                   }`}
                 >
-                  {item.name}
+                  <span>{item.name}</span>
+                  {activeSection === item.link && (
+                    <span className="size-1.5 bg-blue-500 rounded-full shadow-[0_0_8px_rgba(59,130,246,0.8)]" />
+                  )}
                 </Link>
               ))}
             </motion.div>

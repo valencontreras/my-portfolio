@@ -18,12 +18,15 @@ export const Footer = () => {
 
       <div className="flex flex-col items-center text-center space-y-12 relative z-10">
         <h1 className="text-5xl md:text-7xl font-bold text-white max-w-3xl leading-tight">
-          Ready to take <MagicText className="rounded-lg">your</MagicText>{" "}
-          digital presence to the next level?
+          <span>Ready to take</span>{" "}
+          <MagicText className="rounded-lg">your</MagicText>{" "}
+          <span>digital presence to the next level?</span>
         </h1>
         <p className="text-gray-400 text-lg max-w-xl">
-          Reach out to me today and let's discuss how I can help you achieve
-          your goals.
+          <span>
+            Reach out to me today and let&apos;s discuss how I can help you
+            achieve your goals.
+          </span>
         </p>
 
         {/* Magic Button CTA */}
@@ -35,15 +38,15 @@ export const Footer = () => {
             )
           }
         >
-          Let&apos;s get in touch
+          <span>Let&apos;s get in touch</span>
         </MagicButton>
       </div>
 
       <div className="flex flex-col md:flex-row justify-between items-center mt-32 border-t border-white/10 pt-10 gap-8">
         <p className="text-sm font-light text-gray-400">
-          Made with ❤️ and 🤖 by Valentina Contreras
+          <span>Made with ❤️ and 🤖 by Valentina Contreras</span>
           <br />
-          Copyright &copy; 2026
+          <span>Copyright &copy; 2026</span>
         </p>
 
         <div className="flex items-center gap-6">

@@ -53,12 +53,16 @@ export const HeroBento = () => {
                 Crafting Excellence
               </MagicText>
               <h1 className="text-4xl md:text-6xl font-bold leading-tight bg-gradient-to-b from-white to-gray-400 bg-clip-text text-transparent">
-                Transforming Concepts into Seamless User Experiences
+                <span>
+                  Transforming Concepts into Seamless User Experiences
+                </span>
               </h1>
               <p className="text-lg text-gray-400 max-w-lg">
-                I'm a Front-End Developer specializing in modern web
-                technologies, building high-performance applications with
-                beautiful interfaces.
+                <span>
+                  I&apos;m a Front-End Developer specializing in modern web
+                  technologies, building high-performance applications with
+                  beautiful interfaces.
+                </span>
               </p>
             </div>
 
@@ -98,10 +102,14 @@ export const HeroBento = () => {
         >
           <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
           <span className="text-3xl">🚀</span>
-          <h3 className="text-xl font-bold text-white">Always Learning</h3>
+          <h3 className="text-xl font-bold text-white">
+            <span>Always Learning</span>
+          </h3>
           <p className="text-sm text-gray-400">
-            Constantly exploring new libraries and frameworks to build better
-            apps.
+            <span>
+              Constantly exploring new libraries and frameworks to build better
+              apps.
+            </span>
           </p>
         </motion.div>
 
@@ -115,10 +123,10 @@ export const HeroBento = () => {
           <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay" />
           <div className="relative z-10 flex flex-col gap-2">
             <h3 className="text-xl font-bold text-white">
-              Full-Stack Capability
+              <span>Full-Stack Capability</span>
             </h3>
             <p className="text-sm text-gray-400 line-clamp-2">
-              From frontend pixels to backend databases.
+              <span>From frontend pixels to backend databases.</span>
             </p>
           </div>
 
