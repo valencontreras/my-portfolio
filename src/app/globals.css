@@ -22,3 +22,25 @@ body {
     text-wrap: balance;
   }
 }
+
+.scroll-custom {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(168, 85, 247, 0.4) transparent;
+}
+
+.scroll-custom::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scroll-custom::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scroll-custom::-webkit-scrollbar-thumb {
+  background: rgba(168, 85, 247, 0.4);
+  border-radius: 20px;
+}
+
+.scroll-custom::-webkit-scrollbar-thumb:hover {
+  background: rgba(168, 85, 247, 0.6);
+}

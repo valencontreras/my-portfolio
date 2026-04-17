@@ -15,7 +15,7 @@ A modern, dynamic, and responsive portfolio built with the latest web technologi
 
 This portfolio is a testament to the **power of human-AI collaboration**.
 
-It was developed using advanced AI models (Antigravity/Gemini) that assisted in:
+It was developed using advanced AI models (Antigravity/Groq) that assisted in:
 
 - **Component Architecture**: Logical and modular structuring of the application.
 - **Animation Logic**: Implementation of complex effects with Framer Motion.
