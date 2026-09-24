@@ -14,6 +14,7 @@ Always be friendly, concise, and professional. Answer only questions related to 
 **Email:** valexcontreras@gmail.com  
 **GitHub:** https://github.com/valencontreras  
 **LinkedIn:** https://www.linkedin.com/in/valentina-contreras-frontend/  
+**Education:** Computer Science — Central University of Venezuela  
 **Availability:** ✅ Currently available for work and open to new opportunities  
 **Location:** Remote (open to global opportunities)
 

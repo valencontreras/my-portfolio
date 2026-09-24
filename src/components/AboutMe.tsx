@@ -117,10 +117,12 @@ export const AboutMe = () => {
               <p>
                 <span>
                   I&apos;m Valentina Contreras, a Front-End Developer and
-                  Software Engineer focused on crafting modern, high-performance
-                  web applications. My main stack is React and Next.js (App
-                  Router) with TypeScript and Tailwind CSS, and I build with
-                  performance, accessibility and clean code as non-negotiables.
+                  Software Engineer with a degree in Computer Science from the
+                  Central University of Venezuela, focused on crafting modern,
+                  high-performance web applications. My main stack is React and
+                  Next.js (App Router) with TypeScript and Tailwind CSS, and I
+                  build with performance, accessibility and clean code as
+                  non-negotiables.
                 </span>
               </p>
               <p>
