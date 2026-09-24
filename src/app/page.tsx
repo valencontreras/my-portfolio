@@ -1,6 +1,6 @@
 import { Navbar } from "@/components/Navbar";
 import { ProfileHeader } from "@/components/ProfileHeader";
-import { HeroBento } from "@/components/HeroBento";
+import { AboutMe } from "@/components/AboutMe";
 import { TechStack } from "@/components/TechStack";
 import { Projects } from "@/components/Projects";
 import { Experience } from "@/components/Experience";
@@ -12,7 +12,7 @@ export default function Home() {
       <Navbar />
       <div className="max-w-7xl w-full">
         <ProfileHeader />
-        <HeroBento />
+        <AboutMe />
         <TechStack />
         <Projects />
         <Experience />

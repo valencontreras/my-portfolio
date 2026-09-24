@@ -5,6 +5,11 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Offset in-page anchors so sections never land under the fixed navbar */
+[id] {
+  scroll-margin-top: 6rem;
+}
+
 :root {
   --background: #000319;
   --foreground: #ffffff;

@@ -1,63 +1,106 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const navItems = [
+interface NavItem {
+  name: string;
+  link: string;
+}
+
+// Keep in the same order as the sections on the page,
+// so the scroll-spy highlights the right item.
+const navItems: NavItem[] = [
   { name: "About", link: "#about" },
+  { name: "Stack", link: "#stack" },
   { name: "Projects", link: "#projects" },
   { name: "Experience", link: "#experience" },
   { name: "Contact", link: "#contact" },
 ];
 
+// Distance from the top of the viewport where a section counts as active.
+// Slightly below the fixed navbar (~80px tall) so headings are not covered.
+const NAV_OFFSET = 120;
+
 export const Navbar = () => {
   const [activeSection, setActiveSection] = useState("");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  // While a nav link animates a smooth scroll, the spy would highlight every
+  // section it passes through. Mute it until the scrolling settles.
+  const isSmoothScrolling = useRef(false);
+  const muteTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const sections = navItems.map((item) => {
-        const element = document.querySelector(item.link);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          return {
-            link: item.link,
-            top: rect.top,
-            bottom: rect.bottom,
-          };
+    let frame = 0;
+    let settleTimeout: ReturnType<typeof setTimeout> | null = null;
+
+    const updateActiveSection = () => {
+      // The active section is the last one whose top already passed the
+      // offset, so the dot stays lit while scrolling through the section.
+      let current = "";
+
+      navItems.forEach((item) => {
+        const element = document.getElementById(item.link.slice(1));
+
+        if (element && element.getBoundingClientRect().top <= NAV_OFFSET) {
+          current = item.link;
         }
-        return null;
       });
 
-      const currentSection = sections.find((section) => {
-        if (section) {
-          // Check if section is in viewport (with some offset)
-          return section.top <= 100 && section.bottom >= 100;
-        }
-        return false;
-      });
+      // The last section is often too short to ever reach the offset (its top
+      // stays below it at the bottom of the page), so force it there.
+      const isAtBottom =
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 2;
 
-      if (currentSection) {
-        setTimeout(() => {
-          setActiveSection(currentSection.link);
-        }, 800);
+      if (isAtBottom) {
+        current = navItems[navItems.length - 1].link;
       }
+
+      setActiveSection(current);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    const handleScroll = () => {
+      if (isSmoothScrolling.current) {
+        // Unmute and resync once scrolling stops.
+        if (settleTimeout) clearTimeout(settleTimeout);
+        settleTimeout = setTimeout(() => {
+          isSmoothScrolling.current = false;
+          updateActiveSection();
+        }, 150);
+        return;
+      }
+
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(updateActiveSection);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll);
     handleScroll(); // Initial check
 
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      cancelAnimationFrame(frame);
+      if (settleTimeout) clearTimeout(settleTimeout);
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
   }, []);
 
   const handleLinkClick = (link: string) => {
-    setTimeout(() => {
-      setActiveSection(link);
-    }, 800);
+    // Highlight the clicked link immediately instead of waiting for the scroll.
+    setActiveSection(link);
     setIsMenuOpen(false);
+    isSmoothScrolling.current = true;
+
+    // Safety net in case no scroll event fires (e.g. clicking the active item).
+    if (muteTimeout.current) clearTimeout(muteTimeout.current);
+    muteTimeout.current = setTimeout(() => {
+      isSmoothScrolling.current = false;
+    }, 1200);
   };
 
   return (
@@ -73,20 +116,9 @@ export const Navbar = () => {
               className="object-cover"
             />
           </div>
-          <div className="flex flex-col">
-            <span className="text-sm font-bold text-white">
-              Valentina Contreras
-            </span>
-            <div className="flex items-center gap-1.5">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500"></span>
-              </span>
-              <span className="text-[10px] font-medium text-green-400 uppercase tracking-wider">
-                Available for work
-              </span>
-            </div>
-          </div>
+          <span className="text-sm font-bold text-white">
+            Valentina Contreras
+          </span>
         </div>
 
         {/* Right: Navigation Links */}

@@ -29,17 +29,50 @@ export const Footer = () => {
           </span>
         </p>
 
-        {/* Magic Button CTA */}
-        <MagicButton
-          icon={<FaEnvelope size={18} />}
-          onClick={() =>
-            router.push(
-              `mailto:${email}?subject=Hello&body=I would like to collaborate with you`,
-            )
-          }
-        >
-          <span>Let&apos;s get in touch</span>
-        </MagicButton>
+        <div className="flex flex-col md:flex-row items-center gap-6">
+          {/* Magic Button CTA */}
+          <MagicButton
+            icon={<FaEnvelope size={18} />}
+            onClick={() =>
+              router.push(
+                `mailto:${email}?subject=Hello&body=I would like to collaborate with you`,
+              )
+            }
+          >
+            <span>Let&apos;s get in touch</span>
+          </MagicButton>
+
+          <div className="flex items-center gap-4">
+            {[
+              {
+                id: 1,
+                icon: <FaGithub size={20} />,
+                label: "Github",
+                link: github,
+              },
+              {
+                id: 2,
+                icon: <FaLinkedin size={20} />,
+                label: "Linkedin",
+                link: linkedin,
+              },
+            ].map((profile) => (
+              <a
+                key={profile.id}
+                href={profile.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={profile.label}
+                className="group h-12 cursor-pointer inline-flex items-center justify-center gap-2 backdrop-filter backdrop-blur-lg saturate-180 bg-white/5 border border-white/10 rounded-xl px-6 hover:bg-white/10 hover:border-purple-500/30 transition-colors text-white"
+              >
+                {profile.icon}
+                <span className="text-sm font-medium text-gray-300 group-hover:text-white transition-colors">
+                  {profile.label}
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
       </div>
 
       <div className="flex flex-col md:flex-row justify-between items-center mt-32 border-t border-white/10 pt-10 gap-8">
@@ -48,30 +81,6 @@ export const Footer = () => {
           <br />
           <span>Copyright &copy; 2026</span>
         </p>
-
-        <div className="flex items-center gap-6">
-          {[
-            {
-              id: 1,
-              icon: <FaGithub size={20} />,
-              link: github,
-            },
-            {
-              id: 2,
-              icon: <FaLinkedin size={20} />,
-              link: linkedin,
-            },
-          ].map((profile) => (
-            <a
-              key={profile.id}
-              href={profile.link}
-              target="_blank"
-              className="w-10 h-10 cursor-pointer flex justify-center items-center backdrop-filter backdrop-blur-lg saturate-180 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition-colors text-white"
-            >
-              {profile.icon}
-            </a>
-          ))}
-        </div>
       </div>
     </footer>
   );
