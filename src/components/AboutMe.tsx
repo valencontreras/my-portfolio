@@ -6,14 +6,18 @@ import { motion } from "framer-motion";
 import {
   FaBolt,
   FaBookOpen,
-  FaCode,
   FaLightbulb,
+  FaServer,
   FaShieldAlt,
   FaUsers,
   FaCheck,
   FaRegCopy,
 } from "react-icons/fa";
 import { MagicText } from "./MagicUI";
+import { GlassCard } from "./common/GlassCard";
+import { IconBadge } from "./common/IconBadge";
+import { SectionHeading } from "./common/SectionHeading";
+import { SectionLabel } from "./common/SectionLabel";
 import confetti from "canvas-confetti";
 import { email } from "@/const/information";
 
@@ -27,9 +31,9 @@ interface Highlight {
 const highlights: Highlight[] = [
   {
     id: 1,
-    title: "Design to Code",
-    desc: "Turning Figma files into pixel-accurate, production-ready React components — spacing, motion and responsive behaviour included.",
-    icon: <FaCode className="text-purple-400" size={28} />,
+    title: "Full-Stack Capability",
+    desc: "From frontend pixels to backend databases — APIs, data and the glue that connects them to the interface.",
+    icon: <FaServer className="text-purple-400" size={28} />,
   },
   {
     id: 2,
@@ -106,10 +110,9 @@ export const AboutMe = () => {
             <MagicText className="text-xs font-semibold uppercase tracking-[0.2em] mb-2 rounded-lg">
               Get to know me
             </MagicText>
-            <h2 className="text-4xl md:text-5xl font-bold text-white">
-              <span>About </span>
-              <MagicText className="rounded-lg">me</MagicText>
-            </h2>
+            <SectionHeading>
+              About <MagicText className="rounded-lg">me</MagicText>
+            </SectionHeading>
             <div className="space-y-5 text-white font-light leading-relaxed max-w-2xl">
               <p>
                 <span>
@@ -164,37 +167,29 @@ export const AboutMe = () => {
       </motion.div>
       <div className="relative z-10 mt-20">
         {/* Core expertise */}
-        <div className="mb-10 flex items-center gap-4">
-          <h3 className="text-2xl md:text-3xl font-bold text-white shrink-0">
-            <span>Core </span>
-            <MagicText className="rounded-lg">expertise</MagicText>
-          </h3>
-          <span className="hidden sm:block flex-1 h-px bg-linear-to-r from-purple-500/40 to-transparent" />
-        </div>
+        <SectionLabel className="mb-10">
+          Core <MagicText className="rounded-lg">expertise</MagicText>
+        </SectionLabel>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {highlights.map((item, index) => (
-            <motion.div
+            <GlassCard
               key={item.id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
               whileHover={{ y: -6 }}
-              className="rounded-3xl border border-white/10 bg-white/5 p-8 flex flex-col gap-4 relative overflow-hidden group"
+              className="p-8 flex flex-col gap-4"
             >
-              <div className="absolute inset-0 bg-linear-to-br from-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-              <div className="relative z-10 p-3 w-fit rounded-2xl bg-black/50 border border-white/10 group-hover:border-purple-500/30 transition-colors">
-                {item.icon}
-              </div>
-              <h3 className="relative z-10 text-lg font-bold text-white">
+              <IconBadge>{item.icon}</IconBadge>
+              <h3 className="text-lg font-bold text-white">
                 <span>{item.title}</span>
               </h3>
-              <p className="relative z-10 text-sm text-gray-400 font-light">
+              <p className="text-sm text-gray-400 font-light">
                 <span>{item.desc}</span>
               </p>
-            </motion.div>
+            </GlassCard>
           ))}
         </div>
       </div>

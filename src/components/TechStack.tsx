@@ -1,5 +1,7 @@
 import React from "react";
 import { MagicText } from "./MagicUI";
+import { SectionHeading } from "./common/SectionHeading";
+import { SectionLabel } from "./common/SectionLabel";
 
 import {
   SiReact,
@@ -82,28 +84,20 @@ export const TechStack = () => {
       id="stack"
       className="relative w-full max-w-7xl mx-auto px-4 py-20 overflow-hidden"
     >
-      <div className="text-center space-y-4 mb-16">
-        <h2 className="text-4xl md:text-5xl font-bold text-white">
-          <span>My </span>
-          <MagicText className="rounded-lg">tech stack</MagicText>
-        </h2>
-        <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-          <span>
-            The languages, frameworks and tools I use to design, build and ship
-            modern web applications.
-          </span>
-        </p>
-      </div>
+      <SectionHeading
+        align="center"
+        className="mb-16"
+        description="The languages, frameworks and tools I use to design, build and ship modern web applications."
+      >
+        My <MagicText className="rounded-lg">tech stack</MagicText>
+      </SectionHeading>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {techGroups.map((group) => (
           <div key={group.id}>
-            <div className="flex items-center gap-4 mb-6">
-              <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-500 shrink-0">
-                {group.label}
-              </h3>
-              <span className="flex-1 h-px bg-linear-to-r from-white/10 to-transparent" />
-            </div>
+            <SectionLabel variant="caps" className="mb-6">
+              {group.label}
+            </SectionLabel>
 
             <ul className="flex flex-wrap gap-4">
               {group.items.map((tech) => (

@@ -2,22 +2,21 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { FaGithub, FaLinkedin, FaLaptopCode } from "react-icons/fa";
-import { MagicButton, MagicText } from "./MagicUI";
 import { useRouter } from "next/navigation";
-import { email, github, linkedin } from "@/const/information";
-import Link from "next/link";
 import { Sparkles } from "lucide-react";
+import { MagicButton, MagicText } from "./MagicUI";
+import { GlassCard, type GlassAccent } from "./common/GlassCard";
+import { SOCIAL_LINKS, SocialLink } from "./common/SocialLink";
+import { email } from "@/const/information";
 import { cn } from "@/lib/utils";
 
 interface Metric {
   id: number;
   value: string;
   label: string;
-  accent: string;
-  glow: string;
-  ring: string;
-  dot: string;
+  accent: GlassAccent;
+  /** Gradient used by the shimmering value text. */
+  valueClassName: string;
 }
 
 const metrics: Metric[] = [
@@ -25,36 +24,30 @@ const metrics: Metric[] = [
     id: 1,
     value: "4+",
     label: "Years Experience",
-    accent: "from-purple-300 via-purple-500 to-purple-300",
-    glow: "from-purple-500/10",
-    ring: "group-hover:border-purple-500/30",
-    dot: "bg-purple-400",
+    accent: "purple",
+    valueClassName: "from-purple-300 via-purple-500 to-purple-300",
   },
   {
     id: 2,
     value: "11",
     label: "Projects Completed",
-    accent: "from-blue-300 via-blue-500 to-blue-300",
-    glow: "from-blue-500/10",
-    ring: "group-hover:border-blue-500/30",
-    dot: "bg-blue-400",
+    accent: "blue",
+    valueClassName: "from-blue-300 via-blue-500 to-blue-300",
   },
   {
     id: 3,
     value: "3",
     label: "Team Lead",
-    accent: "from-green-300 via-green-500 to-green-300",
-    glow: "from-green-500/10",
-    ring: "group-hover:border-green-500/30",
-    dot: "bg-green-400",
+    accent: "green",
+    valueClassName: "from-green-300 via-green-500 to-green-300",
   },
 ];
 
 export const ProfileHeader = () => {
   const router = useRouter();
   return (
-    <section className="w-full max-w-7xl mx-auto px-4 pt-40 pb-10 flex flex-col gap-16">
-      <div className="flex flex-col md:flex-row items-center justify-between gap-12">
+    <section className="w-full max-w-7xl mx-auto px-4 pt-32 lg:pt-40 pb-10 flex flex-col gap-16">
+      <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
@@ -100,22 +93,14 @@ export const ProfileHeader = () => {
             </MagicButton>
 
             <div className="flex gap-4">
-              <Link
-                href={linkedin}
-                title="Linkedin"
-                target="_blank"
-                className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors text-white"
-              >
-                <FaLinkedin size={20} />
-              </Link>
-              <Link
-                href={github}
-                title="Github"
-                target="_blank"
-                className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors text-white"
-              >
-                <FaGithub size={20} />
-              </Link>
+              {SOCIAL_LINKS.map((profile) => (
+                <SocialLink
+                  key={profile.id}
+                  href={profile.href}
+                  label={profile.label}
+                  icon={profile.icon}
+                />
+              ))}
             </div>
           </div>
         </motion.div>
@@ -170,39 +155,29 @@ export const ProfileHeader = () => {
       </div>
 
       {/* Metric cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 max-w-[60%]">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 lg:max-w-[60%]">
         {metrics.map((metric, index) => (
-          <motion.div
+          <GlassCard
             key={metric.id}
+            accent={metric.accent}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
             whileHover={{ y: -6 }}
-            className={cn(
-              "relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-6 text-center group transition-colors",
-              metric.ring,
-            )}
+            className="p-6 text-center"
           >
-            {/* Colored hover glow (same treatment as the Core Expertise cards) */}
-            <div
-              className={cn(
-                "absolute inset-0 bg-linear-to-br to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500",
-                metric.glow,
-              )}
-            />
-
             <span
               className={cn(
-                "relative z-10 block bg-linear-to-r bg-size-[200%_auto] animate-shimmer bg-clip-text text-4xl font-black text-transparent",
-                metric.accent,
+                "block bg-linear-to-r bg-size-[200%_auto] animate-shimmer bg-clip-text text-4xl font-black text-transparent",
+                metric.valueClassName,
               )}
             >
               {metric.value}
             </span>
-            <span className="relative z-10 mt-3 flex items-center justify-center gap-2 text-[10px] md:text-xs font-medium uppercase tracking-widest text-gray-400 transition-colors group-hover:text-gray-300">
+            <span className="mt-3 flex items-center justify-center gap-2 text-[10px] md:text-xs font-medium uppercase tracking-widest text-gray-400 transition-colors group-hover:text-gray-300">
               {metric.label}
             </span>
-          </motion.div>
+          </GlassCard>
         ))}
       </div>
     </section>

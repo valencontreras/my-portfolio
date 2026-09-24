@@ -1,10 +1,11 @@
 "use client";
 
 import React from "react";
-import { FaEnvelope, FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
+import { FaEnvelope } from "react-icons/fa";
 import { MagicButton, MagicText } from "./MagicUI";
+import { SOCIAL_LINKS, SocialLink } from "./common/SocialLink";
 import { useRouter } from "next/navigation";
-import { email, github, linkedin } from "@/const/information";
+import { email } from "@/const/information";
 
 export const Footer = () => {
   const router = useRouter();
@@ -14,7 +15,7 @@ export const Footer = () => {
       className="relative w-full pt-20 pb-10 max-w-7xl mx-auto px-4 overflow-hidden"
     >
       {/* Background decoration */}
-      <div className="absolute bottom-0 left-0 right-0 h-[400px] bg-purple-500/5 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-100 bg-purple-500/5 blur-[120px] rounded-full pointer-events-none" />
 
       <div className="flex flex-col items-center text-center space-y-12 relative z-10">
         <h1 className="text-5xl md:text-7xl font-bold text-white max-w-3xl leading-tight">
@@ -43,33 +44,14 @@ export const Footer = () => {
           </MagicButton>
 
           <div className="flex items-center gap-4">
-            {[
-              {
-                id: 1,
-                icon: <FaGithub size={20} />,
-                label: "Github",
-                link: github,
-              },
-              {
-                id: 2,
-                icon: <FaLinkedin size={20} />,
-                label: "Linkedin",
-                link: linkedin,
-              },
-            ].map((profile) => (
-              <a
+            {SOCIAL_LINKS.map((profile) => (
+              <SocialLink
                 key={profile.id}
-                href={profile.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={profile.label}
-                className="group h-12 cursor-pointer inline-flex items-center justify-center gap-2 backdrop-filter backdrop-blur-lg saturate-180 bg-white/5 border border-white/10 rounded-xl px-6 hover:bg-white/10 hover:border-purple-500/30 transition-colors text-white"
-              >
-                {profile.icon}
-                <span className="text-sm font-medium text-gray-300 group-hover:text-white transition-colors">
-                  {profile.label}
-                </span>
-              </a>
+                href={profile.href}
+                label={profile.label}
+                icon={profile.icon}
+                variant="pill"
+              />
             ))}
           </div>
         </div>

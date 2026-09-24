@@ -53,6 +53,36 @@ Structural uniformity is mandatory for project scalability:
 
 ---
 
+## 🧩 Shared UI Components (`src/components/common`)
+
+To keep the code base DRY, every repeated piece of markup lives in **one** place. Before writing new markup, check whether one of these primitives already covers the need:
+
+| Component | File | Responsibility |
+| --- | --- | --- |
+| `GlassCard` | `src/components/common/GlassCard.tsx` | The translucent card surface: `rounded-3xl border border-white/10 bg-white/5` + accent hover ring + optional diagonal glow. Accepts every `framer-motion` prop (`initial`, `whileInView`, `whileHover`, …) plus `accent`, `ring` and `glow`. |
+| `SectionHeading` | `src/components/common/SectionHeading.tsx` | Section title (`text-4xl md:text-5xl font-bold text-white`), optional muted `description`, plus `as` (heading level) and `align` (`left` / `center`). |
+| `SectionLabel` | `src/components/common/SectionLabel.tsx` | Sub-heading followed by a hairline gradient rule. `variant="heading"` for a section subtitle, `variant="caps"` for a small uppercase group label. |
+| `IconBadge` | `src/components/common/IconBadge.tsx` | Square tile that frames an icon inside a `GlassCard` (`size="md"` / `"lg"`). |
+| `SocialLink` | `src/components/common/SocialLink.tsx` | External social link — `variant="icon"` (round button) or `variant="pill"` (button with visible label). Also exports the shared `SOCIAL_LINKS` array: add new networks **there**, never inline. |
+
+Chat-widget specific primitives live with their feature in `src/components/chat-widget/`:
+
+| Module | File | Responsibility |
+| --- | --- | --- |
+| `ChatAvatar` | `src/components/chat-widget/ChatAvatar.tsx` | The circular "VC" assistant badge (`size="sm"` / `"md"`, optional `glow`). |
+| `chatStyles.ts` | `src/components/chat-widget/chatStyles.ts` | `BRAND_GRADIENT` and `ASSISTANT_SURFACE` — the only definitions of the brand gradient and the assistant bubble surface. |
+
+### Rules for the common layer
+
+1. **No duplicated markup.** If a block (card chrome, section title, icon tile, social link, avatar, gradient…) appears in more than one component, extract it into `components/common` and consume it everywhere.
+2. **Cards always use `GlassCard`.** Compose it with `className` for padding/layout and `accent` for the colour. Never re-write the `rounded-3xl border border-white/10 bg-white/5 … group relative overflow-hidden` chrome by hand.
+3. **Never repeat the brand gradient or the `VC` badge.** They live in `chatStyles.ts` / `ChatAvatar.tsx`.
+4. **Accent colours are static maps.** Never build Tailwind class names with string interpolation (`` className={`text-${color}-400`} ``) — Tailwind cannot detect generated strings. Add the literal class to the component's `Record<Accent, string>` map instead.
+5. **Do not add `relative z-10` inside `GlassCard`.** The card declares `isolate` and paints the glow layer at `-z-10`, so children are already above the highlight. Adding z-index classes on children is a smell that the layering belongs in the component.
+6. **Icons:** reuse the icon libraries already in `package.json` (`lucide-react`, `react-icons`) instead of hand-writing one-off SVG paths — e.g. the chat close icon is `<X />`, not a raw `<path d="M18 6L6 18M6 6l12 12" />`.
+
+---
+
 ## 📝 Commit Conventions (Version Control)
 
 To maintain a clean and trackable history, we use **Conventional Commits**. Commit messages must always be written in **English**.
@@ -87,3 +117,5 @@ To maintain a clean and trackable history, we use **Conventional Commits**. Comm
 2. **Strict Typing:** Avoid using `any`. Always define explicit interfaces or types (`interface ButtonProps`) for your component props.
 3. **Styling Management:** With Tailwind, always use a conditional utility like `clsx` and `tailwind-merge` (usually exposed as a `cn()` function) to manage dynamic classes and prevent CSS collisions.
 4. **"use client" vs Server Components:** By default, App Router components are Server Components. Add `"use client"` at the top of the file **only** if the component requires interactivity (like `onClick` events, `useState`, `useEffect`, or browser APIs).
+5. **DRY (Don't Repeat Yourself):** Before writing new markup, check `src/components/common`. Any block that would appear in two places (card chrome, section title, icon tile, social link, avatar, gradient…) **must** be extracted into a shared component and consumed everywhere. Never copy-paste styled markup between sections.
+6. **Content lives in data, not in markup:** Repeated section items are declared in a top-level array and rendered with `.map()` (e.g. `highlights` in `AboutMe.tsx`, `metrics` in `ProfileHeader.tsx`, `workExperience` in `Experience.tsx`, `SOCIAL_LINKS` in `common/SocialLink.tsx`). To add, reorder or remove a card, edit that array — never duplicate the JSX by hand.

@@ -3,8 +3,9 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { FaExternalLinkAlt, FaGithub, FaReact } from "react-icons/fa";
+import { FaExternalLinkAlt, FaGithub } from "react-icons/fa";
 import { MagicText } from "./MagicUI";
+import { SectionHeading } from "./common/SectionHeading";
 import {
   SiReact,
   SiNextdotjs,
@@ -32,12 +33,12 @@ const projects = [
 
 export const Projects = () => {
   return (
-    <div id="projects" className="py-20 w-full max-w-7xl mx-auto px-4">
-      <h1 className="text-4xl md:text-5xl font-bold text-center text-white mb-20">
+    <div id="projects" className="lg:py-20 w-full max-w-7xl mx-auto px-4">
+      <SectionHeading as="h1" align="center" className="mb-20">
         A small selection of{" "}
         <MagicText className="rounded-lg">recent projects</MagicText>
-      </h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-10">
+      </SectionHeading>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mt-10">
         {projects.map((item) => (
           <motion.div
             key={item.id}

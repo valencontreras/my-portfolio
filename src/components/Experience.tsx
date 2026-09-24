@@ -1,9 +1,12 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
 import { FaBriefcase, FaCode, FaGraduationCap, FaRobot } from "react-icons/fa";
 import { MagicText } from "./MagicUI";
+import { GlassCard } from "./common/GlassCard";
+import { IconBadge } from "./common/IconBadge";
+import { SectionHeading } from "./common/SectionHeading";
+import { cn } from "@/lib/utils";
 
 const workExperience = [
   {
@@ -39,24 +42,24 @@ const workExperience = [
 export const Experience = () => {
   return (
     <div id="experience" className="py-20 w-full max-w-7xl mx-auto px-4">
-      <h1 className="text-4xl md:text-5xl font-bold text-center text-white mb-20">
+      <SectionHeading as="h1" align="center" className="mb-20">
         My <MagicText className="rounded-lg">work experience</MagicText>
-      </h1>
+      </SectionHeading>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {workExperience.map((card) => (
-          <motion.div
+          <GlassCard
             key={card.id}
+            ring={false}
+            glow={false}
             whileHover={{ scale: 1.02 }}
-            className="flex-1 text-white border border-white/10 p-8 rounded-3xl bg-white/5 relative group overflow-hidden"
+            className={cn("flex-1 text-white p-8", card.className)}
           >
             {/* Animated Glow Border Beam Placeholder */}
-            <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-transparent via-purple-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute inset-x-0 bottom-0 h-1 bg-linear-to-r from-transparent via-purple-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
             <div className="flex flex-col md:flex-row md:items-center gap-6">
-              <div className="p-4 w-fit rounded-2xl bg-black/50 border border-white/10 group-hover:border-purple-500/30 transition-colors">
-                {card.icon}
-              </div>
+              <IconBadge size="lg">{card.icon}</IconBadge>
               <div className="space-y-2">
                 <h2 className="text-xl md:text-2xl font-bold">
                   <span>{card.title}</span>
@@ -66,7 +69,7 @@ export const Experience = () => {
                 </p>
               </div>
             </div>
-          </motion.div>
+          </GlassCard>
         ))}
       </div>
     </div>

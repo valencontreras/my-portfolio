@@ -23,7 +23,7 @@ export const MagicButton = ({
       whileTap={{ scale: 0.95 }}
       onClick={onClick}
       className={cn(
-        "relative inline-flex h-12 overflow-hidden rounded-xl p-[1px] focus:outline-none",
+        "relative inline-flex h-12 overflow-hidden rounded-xl p-px focus:outline-none",
         className,
       )}
     >

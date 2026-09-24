@@ -2,6 +2,9 @@
 
 import React, { useState, useRef, useEffect, KeyboardEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { X } from "lucide-react";
+import { ChatAvatar } from "./ChatAvatar";
+import { ASSISTANT_SURFACE, BRAND_GRADIENT } from "./chatStyles";
 
 interface Message {
   id: string;
@@ -153,16 +156,7 @@ export const ChatWidget = () => {
               <div className="flex items-center gap-3">
                 {/* Avatar */}
                 <div className="relative">
-                  <div
-                    className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold text-white shrink-0"
-                    style={{
-                      background:
-                        "linear-gradient(135deg, #a855f7 0%, #6366f1 100%)",
-                      boxShadow: "0 0 16px rgba(168,85,247,0.4)",
-                    }}
-                  >
-                    VC
-                  </div>
+                  <ChatAvatar size="md" glow />
                   <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-400 border-2 border-[#0a041e] block" />
                 </div>
 
@@ -179,19 +173,7 @@ export const ChatWidget = () => {
                 aria-label="Close chat"
                 className="w-8 h-8 rounded-full flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-all duration-200"
               >
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                  className="w-4 h-4"
-                >
-                  <path
-                    d="M18 6L6 18M6 6l12 12"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
+                <X size={16} />
               </button>
             </div>
 
@@ -273,8 +255,7 @@ export const ChatWidget = () => {
                   aria-label="Send message"
                   className="w-8 h-8 rounded-xl flex items-center justify-center shrink-0 transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed hover:scale-110 active:scale-95 mb-0.5"
                   style={{
-                    background:
-                      "linear-gradient(135deg, #a855f7 0%, #6366f1 100%)",
+                    background: BRAND_GRADIENT,
                     boxShadow: input.trim()
                       ? "0 0 12px rgba(168,85,247,0.4)"
                       : "none",
@@ -307,7 +288,7 @@ export const ChatWidget = () => {
         whileTap={{ scale: 0.94 }}
         className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full flex items-center justify-center shadow-2xl"
         style={{
-          background: "linear-gradient(135deg, #a855f7 0%, #6366f1 100%)",
+          background: BRAND_GRADIENT,
           boxShadow:
             "0 8px 32px rgba(168,85,247,0.5), 0 0 0 1px rgba(168,85,247,0.3)",
         }}
@@ -321,19 +302,7 @@ export const ChatWidget = () => {
               exit={{ rotate: 90, opacity: 0 }}
               transition={{ duration: 0.18 }}
             >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="white"
-                strokeWidth={2.5}
-                className="w-6 h-6"
-              >
-                <path
-                  d="M18 6L6 18M6 6l12 12"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+              <X size={24} strokeWidth={2.5} className="text-white" />
             </motion.span>
           ) : (
             <motion.span
@@ -376,16 +345,7 @@ const MessageBubble = ({ message }: MessageBubbleProps) => {
       className={`flex ${isUser ? "justify-end" : "justify-start"} gap-2`}
     >
       {/* Assistant avatar dot */}
-      {!isUser && (
-        <div
-          className="w-6 h-6 rounded-full shrink-0 mt-0.5 flex items-center justify-center text-[9px] font-bold text-white"
-          style={{
-            background: "linear-gradient(135deg, #a855f7 0%, #6366f1 100%)",
-          }}
-        >
-          VC
-        </div>
-      )}
+      {!isUser && <ChatAvatar className="mt-0.5" />}
 
       <div
         className={`max-w-[78%] px-3.5 py-2.5 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap ${
@@ -394,13 +354,10 @@ const MessageBubble = ({ message }: MessageBubbleProps) => {
         style={
           isUser
             ? {
-                background: "linear-gradient(135deg, #a855f7 0%, #6366f1 100%)",
+                background: BRAND_GRADIENT,
                 boxShadow: "0 4px 12px rgba(168,85,247,0.25)",
               }
-            : {
-                background: "rgba(255,255,255,0.06)",
-                border: "1px solid rgba(255,255,255,0.08)",
-              }
+            : ASSISTANT_SURFACE
         }
       >
         {message.content}
@@ -415,20 +372,10 @@ const TypingIndicator = () => (
     animate={{ opacity: 1, y: 0 }}
     className="flex items-center gap-2"
   >
-    <div
-      className="w-6 h-6 rounded-full shrink-0 flex items-center justify-center text-[9px] font-bold text-white"
-      style={{
-        background: "linear-gradient(135deg, #a855f7 0%, #6366f1 100%)",
-      }}
-    >
-      VC
-    </div>
+    <ChatAvatar />
     <div
       className="flex items-center gap-1.5 px-4 py-3 rounded-2xl rounded-tl-sm"
-      style={{
-        background: "rgba(255,255,255,0.06)",
-        border: "1px solid rgba(255,255,255,0.08)",
-      }}
+      style={ASSISTANT_SURFACE}
     >
       {[0, 1, 2].map((i) => (
         <motion.span
