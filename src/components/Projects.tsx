@@ -45,7 +45,7 @@ export const Projects = () => {
             whileHover={{ y: -10 }}
             className="flex flex-col items-center justify-center p-4 rounded-3xl border border-white/10 bg-[#000319] group relative overflow-hidden"
           >
-            <div className="relative w-full h-[250px] md:h-[300px] overflow-hidden rounded-2xl">
+            <div className="relative w-full h-62.5 md:h-75 overflow-hidden rounded-2xl">
               <div className="absolute inset-0 bg-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity z-10" />
               <Image
                 src={item.img}

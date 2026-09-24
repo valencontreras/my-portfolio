@@ -135,7 +135,7 @@ export const ChatWidget = () => {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.92, y: 16 }}
             transition={{ duration: 0.25, ease: "easeOut" }}
-            className="fixed bottom-[88px] right-6 z-50 w-[360px] max-h-[520px] flex flex-col rounded-3xl overflow-hidden shadow-2xl"
+            className="fixed bottom-22 right-6 z-50 w-90 max-h-130 flex flex-col rounded-3xl overflow-hidden shadow-2xl"
             style={{
               background:
                 "linear-gradient(145deg, rgba(10,4,30,0.98) 0%, rgba(5,2,18,0.99) 100%)",
