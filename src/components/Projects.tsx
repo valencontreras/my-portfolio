@@ -15,19 +15,47 @@ import {
 import Link from "next/link";
 
 const projects = [
+  // {
+  //   id: 1,
+  //   title: "Frontend Template for Projects",
+  //   des: "A responsive and modern frontend template for projects, built with React and Tailwind CSS.",
+  //   img: "/images/projects/frontend-template.png",
+  //   iconLists: [
+  //     { icon: <SiReact />, label: "React JS" },
+  //     { icon: <SiNextdotjs />, label: "Next JS" },
+  //     { icon: <SiTypescript />, label: "TypeScript" },
+  //     { icon: <SiTailwindcss />, label: "Tailwind" },
+  //   ],
+  //   link: "https://frontend-exo-template.vercel.app/",
+  //   github: "https://github.com/Cszart/frontend-EXO-template/tree/main",
+  // },
   {
     id: 1,
-    title: "Frontend Template for Projects",
-    des: "A responsive and modern frontend template for projects, built with React and Tailwind CSS.",
-    img: "/images/projects/frontend-template.png",
+    title: "Invita Platform",
+    des: "A platform for creating and managing invitations, built with React and Tailwind CSS.",
+    img: "/images/projects/invita-platform-header.png",
     iconLists: [
       { icon: <SiReact />, label: "React JS" },
       { icon: <SiNextdotjs />, label: "Next JS" },
       { icon: <SiTypescript />, label: "TypeScript" },
       { icon: <SiTailwindcss />, label: "Tailwind" },
     ],
-    link: "https://frontend-exo-template.vercel.app/",
-    github: "https://github.com/Cszart/frontend-EXO-template/tree/main",
+    link: "https://invita-platform.vercel.app/",
+    github: "https://github.com/valencontreras/invita-platform/tree/main",
+  },
+  {
+    id: 2,
+    title: "Peak Fit Landing Page",
+    des: "A modern landing page for a fitness center, built with React and Tailwind CSS.",
+    img: "/images/projects/peak-fit-header.png",
+    iconLists: [
+      { icon: <SiReact />, label: "React JS" },
+      { icon: <SiNextdotjs />, label: "Next JS" },
+      { icon: <SiTypescript />, label: "TypeScript" },
+      { icon: <SiTailwindcss />, label: "Tailwind" },
+    ],
+    link: "https://peak-fit.vercel.app/",
+    github: "https://github.com/valencontreras/peak-fit-landing-page/tree/main",
   },
 ];
 
