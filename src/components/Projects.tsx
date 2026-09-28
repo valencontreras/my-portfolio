@@ -54,7 +54,7 @@ const projects = [
       { icon: <SiTypescript />, label: "TypeScript" },
       { icon: <SiTailwindcss />, label: "Tailwind" },
     ],
-    link: "https://peak-fit.vercel.app/",
+    link: "https://peak-fit-six.vercel.app/",
     github: "https://github.com/valencontreras/peak-fit-landing-page/tree/main",
   },
 ];
